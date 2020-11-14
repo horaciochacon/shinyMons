@@ -205,7 +205,6 @@ shiny::shinyApp(
     )
 
     # infos module
-    source("../../R/pokeInfosModule.R")
     callModule(
       module = pokeInfos,
       id = "infos",
