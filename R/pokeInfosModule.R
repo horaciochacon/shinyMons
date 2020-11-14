@@ -34,13 +34,13 @@ pokeInfos <- function(input, output, session, mainData, details, selected, shiny
 
     pokeNames <- names(mainData)
     sprites <- vapply(seq_along(pokeNames), FUN = function(i) {
-      paste0("http://www.pokestadium.com/sprites/xy/", mainData[[i]]$name, ".gif")
+      paste0(mainData[[i]]$name, ".jpg")
     }, FUN.VALUE = character(1))
     names(sprites) <- pokeNames
 
     req(!is.null(selected()))
 
-    habitats <- unique(unlist(lapply(1:151, function(i) details[[i]]$habitat$name)))
+    habitats <- unique(unlist(lapply(1:5, function(i) details[[i]]$habitat$name)))
     habitatColor <- switch (
       details[[selected()]]$habitat$name,
       "grassland" = "lime",
