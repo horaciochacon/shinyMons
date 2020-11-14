@@ -7,20 +7,21 @@ library(pushbar)
 library(shinyMons)
 library(waiter)
 
-source("pokeNames.R")
+# source("pokeNames.R")
 
 # main data
-pokeMain <- readRDS("pokeMain")
-pokeDetails <- readRDS("pokeDetails")
+pokeMain <- readRDS("pokeMain")[1:5]
+pokeNames <- names(pokeMain)
+pokeDetails <- readRDS("pokeDetails")[1:5]
 
 # subdata from main
-pokeLocations <- readRDS("pokeLocations")
-pokeMoves <- readRDS("pokeMoves")
-pokeTypes <- readRDS("pokeTypes")
-pokeEvolutions <- readRDS("pokeEvolutions")
+pokeLocations <- readRDS("pokeLocations")[1:5]
+pokeMoves <- readRDS("pokeMoves")[1:5]
+pokeTypes <- readRDS("pokeTypes")[1:5]
+pokeEvolutions <- readRDS("pokeEvolutions")[1:5]
 pokeAttacks <- readRDS("pokeAttacks")
 pokeEdges <- readRDS("pokeEdges")
-pokeGroups <- readRDS("pokeGroups")
+pokeGroups <- readRDS("pokeGroups")[1:5]
 
 # pokemon sprites
 pokeSprites <- vapply(
@@ -180,7 +181,7 @@ shiny::shinyApp(
     isMobile <- reactive(input$isMobile)
 
 
-    # Network module: network stores a potential selected node in the
+    # Network module: network stores xa potential selected node in the
     # network and pass it to the pickerInput function in the main
     # module to update its value
     network <- callModule(
@@ -204,6 +205,7 @@ shiny::shinyApp(
     )
 
     # infos module
+    source("../../R/pokeInfosModule.R")
     callModule(
       module = pokeInfos,
       id = "infos",
@@ -221,34 +223,34 @@ shiny::shinyApp(
     callModule(module = pokeMove, id = "moves", selected = main$pokeSelect, moves = pokeMoves)
 
     # evolutions module
-    callModule(
-      module = pokeEvolve,
-      id = "evol",
-      mainData = pokeMain,
-      details = pokeDetails,
-      selected = main$pokeSelect,
-      shiny = main$pokeShiny,
-      evolutions = pokeEvolutions
-    )
+    # callModule(
+    #   module = pokeEvolve,
+    #   id = "evol",
+    #   mainData = pokeMain,
+    #   details = pokeDetails,
+    #   selected = main$pokeSelect,
+    #   shiny = main$pokeShiny,
+    #   evolutions = pokeEvolutions
+    # )
 
     # fights module
-    callModule(
-      module = pokeFight,
-      id = "fights",
-      mainData = pokeMain,
-      sprites = pokeSprites,
-      attacks = pokeAttacks,
-      types = pokeTypes
-    )
+    # callModule(
+    #   module = pokeFight,
+    #   id = "fights",
+    #   mainData = pokeMain,
+    #   sprites = pokeSprites,
+    #   attacks = pokeAttacks,
+    #   types = pokeTypes
+    # )
 
-    # location
-    callModule(module = pokeLocation, id = "location", selected = main$pokeSelect, locations = pokeLocations)
+    # # location
+    # callModule(module = pokeLocation, id = "location", selected = main$pokeSelect, locations = pokeLocations)
     # gallery module
-    callModule(module = pokeGallery, id = "gallery", mainData = pokeMain, details = pokeDetails, shiny = main$pokeShiny)
-    # pokemon attacks
-    callModule(module = pokeAttack, id = "attacks", attacks = pokeAttacks)
-    # other elements
-    callModule(module = pokeOther, id = "other", mainData = pokeMain, details = pokeDetails)
+    # callModule(module = pokeGallery, id = "gallery", mainData = pokeMain, details = pokeDetails, shiny = main$pokeShiny)
+    # # pokemon attacks
+    # callModule(module = pokeAttack, id = "attacks", attacks = pokeAttacks)
+    # # other elements
+    # callModule(module = pokeOther, id = "other", mainData = pokeMain, details = pokeDetails)
 
   }
 )
