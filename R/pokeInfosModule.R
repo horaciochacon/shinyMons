@@ -72,7 +72,7 @@ pokeInfos <- function(input, output, session, mainData, details, selected, shiny
           } else {
             mainData[[selected()]]$sprites$front_shiny
           }
-          # ,
+          ,
           # socials = tablerSocialLinks(
           #   tablerSocialLink(
           #     name = "pokeApi",
