@@ -71,19 +71,20 @@ pokeInfos <- function(input, output, session, mainData, details, selected, shiny
             sprites[[selected()]]
           } else {
             mainData[[selected()]]$sprites$front_shiny
-          },
-          socials = tablerSocialLinks(
-            tablerSocialLink(
-              name = "pokeApi",
-              href = paste0("https://pokeapi.co/api/v2/pokemon/", tolower(selected())),
-              icon = "at"
-            ),
-            tablerSocialLink(
-              name = "Bulbapedia",
-              href = paste0("https://bulbapedia.bulbagarden.net/wiki/", selected(), "_(Pok\u00e9mon)"),
-              icon = "address-card"
-            )
-          ),
+          }
+          # ,
+          # socials = tablerSocialLinks(
+          #   tablerSocialLink(
+          #     name = "pokeApi",
+          #     href = paste0("https://pokeapi.co/api/v2/pokemon/", tolower(selected())),
+          #     icon = "at"
+          #   ),
+          #   tablerSocialLink(
+          #     name = "Bulbapedia",
+          #     href = paste0("https://bulbapedia.bulbagarden.net/wiki/", selected(), "_(Pok\u00e9mon)"),
+          #     icon = "address-card"
+          #   )
+          # ),
           width = 12
         )
       ),
